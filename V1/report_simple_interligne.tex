@@ -146,13 +146,24 @@
 
 
 \hyphenation{op-tical net-works semi-conduc-tor}
-% simple interligne demandé par Mr Chaumette
+% simple interligne demandée par Mr Chaumette
 \usepackage{setspace}
 \singlespacing
 
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage[table]{xcolor}
+
+\usepackage{filecontents}
+\begin{filecontents}{jobname.bib}
+@book{author_book,
+title = {Book's title},
+author = {Author, Some},
+location = {The City},
+publisher = {Publisher},
+year = {2005},
+}
+\end{filecontents}
 \begin{document}
 %
 % paper title
@@ -193,8 +204,10 @@ At the time of digital transformation, all innovative technologies are connected
 The first results they obtained show that this device is able to identify significant behaviors in the shower use. They placed about several sensors and collected data during 2 weeks. The analysis of these data makes it possible to sensitize a consumer punctually on his water consumption. This approach revealed a significant variation in average water consumption for a shower.
 
 \subsection{Related Work}
----------------------------------------------------------------- 
-//Voir partie VII. //
+Many similar works has been already designed for a problem nearly like this whose one of its solutions is treated in this paper.
+Regarding the sensor of water, the only one which is mentioned in this document is Hydrosense, \cite{ref1} a single-point sensor of pressure of whole-home water activity. Unlike Tethys, rather than identify reliably the fixtures in large buildings, Hydrosense supports only identification of activity  a the level of these fixtures.
+Concerning the delay-tolerant networking, Tethys relies on BLE technology supported by most of its gateway devices, allowing the crowdsourcing, instead of using traditional fixed IoT gateway designs used on past work where infranstructure were less reliable and most expensive.
+With regard to security and confidentiality, even if Tethys collects sensible data rather innocuous, it is better than IoT devices which are vulnerable due to their bad conception.
 \section{Paper Goals}\label{sec:paperGoals}
 
 Existing measurement models for building-wide consumption do not reveal specific information at scale of a resident. Indeed, as the Motivation's Content of the document shows us, we can know what was the daily consumption of a building, but these data are not subject to other interpretations. It would be interesting to determine whether a decrease in consumption would be due to a reduction in shower time or shower frequency of residents. 
@@ -266,10 +279,10 @@ In this part, we will see that there is a way to improve data transfer velocity,
 \end{itemize}
 The purpose for them was to "\emph{measure how their results compare against initial hypotheses about data and water use patterns}" \cite{IEEEhowto:}.
 
-In order to reduce the amount of data to be stored and transmitted, they only collect if there is a change in water flow or temperature. This helps define what they call a compression ratio. For example if we have a compression ratio of 20, it means that for a 200 data points collected normally during a 200 second shower, they remain 10 data points.The better the ratio, the better the compression will be as we can see in Figure~\ref{étiquette4}. Their results show that "\emph{half the toal showers have compression ratios below 20, with a degree of high variance overall}"\cite{IEEEhowto:}. Difference in recorded shower is explained by variations in pressure from specific water usage. More explanations are noticed in the report \cite{IEEEhowto:}.
+In order to reduce the amount of data to be stored and transmitted, they only collect if there is a change in water flow or temperature. This helps define what they call a compression ratio. For example if we have a compression ratio of 20, it means that for a 200 data points collected normally during a 200 second shower, they remain 10 data points.The better the ratio, the better the compression will be as we can see in Figure~\ref{étiquette4}. Their results show that "\emph{half the goal showers have compression ratios below 20, with a degree of high variance overall}"\cite{IEEEhowto:}. Difference in recorded shower is explained by variations in pressure from specific water usage. More explanations are noticed in the report \cite{IEEEhowto:}.
 
 Concerning showering patterns, they apply some indicators in order to identify correctly showering behavior. The Figure~\ref{étiquette5} highlight the distribution of measured shower lengths. It clears the fact that the median shower length is 7.77 minutes with a huge proportion of showers taking 5 minutes or less. However, The little proportion of consumers taking very long time shower (4\%) need to be target in order to improve water conservation. 
-The use of Tethys show that energy harvesting was significantly a succes because with just a single shower is enough to cover mainly energy consumption of the device. 
+The use of Tethys show that energy harvesting was significantly a success because with just a single shower is enough to cover mainly energy consumption of the device. 
 
 \begin{center}
     \begin{figure}[!t]
@@ -289,23 +302,18 @@ The use of Tethys show that energy harvesting was significantly a succes because
 
 \section{Discussion}\label{sec:discussion}
 \subsection{Plus/Minus Reviews}
+As developed in the Related Works section, Tethys presents, on the one hand, many advantages over existing solutions. The first one is it can works without relying on existing electrical infrastructure. It supports and prevents several flaws that could happen with its gateway devices. For example, in the absence of the application on the smartphones or network-related malfunction, Tethys implements a reliable end-to-end acknowledgment that handles customer data delays to the server.
+In terms of energy recovery, unlike other devices using thermoelectric energy, Tethys uses electromagnetic energy that is more invasive.
+The use of BLE (Bluetooth Low Energy) is also one of the major advantages of Tethys.
 
+On the other hand, it also has some disadvantages, related to security. The owners of the smartphones acting as gateway could undergo a collection of their personal data without their consent even if Tethys guarantees otherwise. Uploading the collected data to the server requires an internet connection which, for now, we do not see where it comes from. Is it available to residents free of charge? Does it come from their own mobile data or their WI-FI connection?
+In case of malfunction of the smartphone, data already collected could be permanently lost if the phone has remained several days without internet connection before the incident.
 
 \section{Conclusion}\label{sec:conclusion}
-
+For the need of collection and measurement of water flow in the buildings at each device at the minute or second granularity, Tethys is a perfect choice. Its policy of using energy allows it to operate as long as possible with low consumption. Its modularity and portability allow it not to need existing infrastructure but just smartphones that will serve as gateways. Although these gateways are unreliable, Tethys nevertheless preserves the confidentiality of the data collected. 
+Having had convincing first results, Tethys could be a reference in the data collection without access to the infrastructure
 \appendices
-\section{Terms definition}
-Here we define some terms that need to be explained.
-BLE, TLS, Sensor, PBC
 \newline
-
-
-
-\begin{thebibliography}{2}
-\bibitem{IEEEhowto:}
-H.~Chiang, J. ~Hong, K. ~Kiningham, L. ~Riliskis, P. ~Levis, and M.~Horowitz, \emph{Tethys: Collecting Sensor Data Without Infrasctructure or Trust}, \hskip 1em plus
-  0.5em minus 0.4em\relax 2018 IEEE/ACM Third International Conference on Internet-of-Things Design and Implementation.
-\bibitem{amphiro:}
-Amphiro. (2018) amphiro. [Online]. Available: http://amphiro.com/
-\end{thebibliography}
+\bibliographystyle{plain}
+\bibliography{bibliography}
 \end{document}
